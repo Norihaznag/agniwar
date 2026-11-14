@@ -1,0 +1,9 @@
+agniwar visual redesign update
+
+This package includes the previous redesign and AdSense verification changes, plus the reference-inspired homepage update. It contains frontend files and documentation only. It does not contain server or transfer engine files.
+
+Merge these files into your existing repository preserving paths, review any existing changes before overwriting, commit and push. Vercel must build the updated commit. Do not remove the existing VITE_SIGNAL_URL environment variable. Refresh the deployed site after deployment; it may take a reload for a previous service worker to update.
+
+Real discovered devices and received files are shown; the reference image's example devices are not hardcoded. This device, transfer safety information and the Guides link remain available. The folder and background artwork are recreated from the screenshot, so browser, screen and content differences prevent a guarantee of pixel-identical output.
+
+AdSense verification uses your provided publisher ID. Google approval is not guaranteed. Ads are disabled by default. Before enabling them, review publisher policies, configure a real ad slot and meet applicable consent/privacy obligations.

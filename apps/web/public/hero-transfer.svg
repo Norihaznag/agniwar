@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 160" aria-hidden="true">
+<defs>
+ <linearGradient id="cloud" x2="0" y2="1"><stop stop-color="#c6ddff"/><stop offset="1" stop-color="#edf4ff"/></linearGradient>
+ <linearGradient id="back" x2="0.25" y2="1"><stop stop-color="#b6dbff"/><stop offset=".4" stop-color="#479bff"/><stop offset="1" stop-color="#0751c7"/></linearGradient>
+ <linearGradient id="front" x2=".14" y2="1"><stop stop-color="#c3dfff"/><stop offset=".37" stop-color="#489cff"/><stop offset="1" stop-color="#0058f4"/></linearGradient>
+ <filter id="shadow" x="-25%" y="-30%" width="150%" height="180%"><feGaussianBlur stdDeviation="5"/></filter>
+</defs>
+<path fill="url(#cloud)" d="M22 125c0-24 19-42 42-42 7 0 13 2 19 5 4-30 28-53 58-53s55 23 59 52c5-3 11-4 17-4 23 0 41 18 41 42v5H22z"/>
+<path fill="url(#cloud)" d="M402 125c0-24 18-42 41-42 6 0 12 1 17 4 4-29 29-52 59-52s54 23 58 53c6-3 12-5 19-5 23 0 42 18 42 42v5H402z"/>
+<ellipse cx="330" cy="143" rx="145" ry="15" fill="#c9dfff" opacity=".65"/>
+<ellipse cx="330" cy="139" rx="92" ry="11" fill="#3778db" opacity=".25" filter="url(#shadow)"/>
+<path d="M250 31Q250 10 270 10h44q9 0 15 8l6 7h60q11 0 11 12v94H250z" fill="url(#back)" stroke="#a0c9ff" stroke-width="5"/>
+<path d="M263 35h133q15 0 14 15l-4 78q-.5 14-15 14H266q-15 0-15-14l-2-76q0-17 14-17z" fill="url(#front)" stroke="#9ccaff" stroke-width="4"/>
+<path d="M268 38h127q12 0 12 12" fill="none" stroke="#e0efff" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+<path d="M329 113V67m-17 17 17-17 17 17" fill="none" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<g stroke="#0d64ff" stroke-width="5" stroke-linecap="round"><path d="M399 6v10M414 11l-5 8M423 25l-9 3"/></g>
+</svg>
