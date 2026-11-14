@@ -19,7 +19,9 @@ PORT=8787 ALLOWED_ORIGINS=https://your-domain.example npm --workspace server sta
 
 Terminate TLS at the proxy and use `wss://` publicly. `/health` provides a simple health check. Configure proxy idle timeouts to allow 30-second pings; enforce additional ingress connection and rate limits. Do not log full signaling messages. A single instance is required for one shared presence map. Public deployment runs without `--lan`; do not expose the local subnet-discovery development mode to the public internet.
 
-## Cloudflare Pages frontend
+## Frontend (Vercel or Cloudflare Pages)
+
+On Vercel, keep the repository root as the project root, use `npm run build` and output `apps/web/dist`. Keep the existing production `VITE_SIGNAL_URL`; set `PUBLIC_SITE_URL=https://www.agniwar.com` for canonical metadata. The build generates the content pages before Vite builds the app. Confirm the deployment and routes after publishing.
 
 Set build command `npm ci && npm run build` and output directory `apps/web/dist`. Build-time variables:
 
@@ -34,7 +36,7 @@ The `_redirects` file serves the app at `/transfer`; static guide and legal page
 
 The public publisher ID is configured in the ownership verification meta tag and `apps/web/public/ads.txt`. Deploy first, select **Meta tag** in AdSense and request review. Never place ad code on `/transfer`. Actual approval is Google's decision.
 
-By default no advertising script loads. Before enabling ads, configure and test a Google-certified consent management platform appropriate to your visitors, complete and independently review the operator's privacy, retention, contact and legal disclosures, and check Google publisher policies. Disclose any other ad vendors enabled in the account. Set `PUBLIC_CONTACT_EMAIL` and `PUBLIC_SITE_URL` to the real public contact and site origin at build time. After approval and those checks, `PUBLIC_ENABLE_ADS=true` adds the AdSense script only to individual guide articles and adds an advertising disclosure to the privacy page. Rebuild and redeploy. Confirm ad placements and disable any formats that could interfere with navigation; do not enable ads elsewhere. This flag does not itself configure or supply a consent mechanism.
+By default no advertising script loads. Before enabling ads, configure and test a Google-certified consent management platform appropriate to your visitors, complete and independently review the operator's privacy, retention, contact and legal disclosures, and check Google publisher policies. Disclose any other ad vendors enabled in the account. Set `PUBLIC_CONTACT_EMAIL` and `PUBLIC_SITE_URL` to the real public contact and site origin at build time. After approval and those checks, setting both `PUBLIC_ENABLE_ADS=true` and `PUBLIC_ADSENSE_SLOT` to your genuine numeric ad-unit ID adds an optional responsive placement only to individual guide articles, and adds an advertising disclosure to the privacy page. Rebuild and redeploy. Confirm ad placements and disable any formats that could interfere with navigation; do not enable ads elsewhere. This flag does not itself configure or supply a consent mechanism.
 
 ## Physical-device test plan
 
