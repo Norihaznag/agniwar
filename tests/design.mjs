@@ -1,0 +1,12 @@
+import {chromium} from 'playwright';
+import {existsSync} from 'node:fs';
+const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||(existsSync('/usr/local/bin/chromium')?'/usr/local/bin/chromium':chromium.executablePath()),args:['--no-sandbox']});
+const pc=await browser.newContext({viewport:{width:1365,height:900},colorScheme:'light'});const a=await pc.newPage();
+const check=async(p,name)=>{const r=await p.evaluate(()=>({width:document.documentElement.scrollWidth,viewport:innerWidth,title:document.title}));if(r.width>r.viewport)throw Error(`${name} horizontal overflow: ${JSON.stringify(r)}`);};
+try{
+ await a.goto('http://localhost:5173/transfer');await a.waitForSelector('#connection:text("Connected")');await a.screenshot({path:'/data/agniwar-new-empty.png',fullPage:true});await check(a,'empty');
+ const mobile=await browser.newContext({viewport:{width:390,height:844},colorScheme:'dark',userAgent:'Mozilla/5.0 (Linux; Android 13; Mobile) AppleWebKit/537.36 Chrome/130.0 Mobile Safari/537.36'});const b=await mobile.newPage();await b.goto('http://localhost:5173/transfer');await Promise.all([a.locator('.device').first().waitFor(),b.locator('.device').first().waitFor()]);await a.screenshot({path:'/data/agniwar-new-desktop.png',fullPage:true});await b.screenshot({path:'/data/agniwar-new-mobile-dark.png',fullPage:true});await check(a,'desktop');await check(b,'mobile');
+ await a.locator('.device').first().click();await a.locator('#files').setInputFiles([{name:'project-summary.pdf',mimeType:'application/pdf',buffer:Buffer.from('example')},{name:'photo.jpg',mimeType:'image/jpeg',buffer:Buffer.from('example')}]);await a.getByRole('button',{name:'Send files'}).click();await b.getByRole('heading',{name:'Incoming files'}).waitFor();await b.screenshot({path:'/data/agniwar-new-incoming-dark.png',fullPage:true});await check(b,'incoming');await b.getByRole('button',{name:'Decline'}).click();
+ const guide=await pc.newPage();await guide.goto('http://localhost:5173/guides/local-file-transfer/');await guide.screenshot({path:'/data/agniwar-new-guide.png',fullPage:true});await check(guide,'guide');
+ const gm=await mobile.newPage();await gm.goto('http://localhost:5173/guides/');await gm.screenshot({path:'/data/agniwar-new-guides-mobile.png',fullPage:true});await check(gm,'guides mobile');await mobile.close();console.log('PASS: desktop/mobile, light/dark, live devices, incoming dialog, guides; no horizontal overflow');
+}finally{await pc.close();await browser.close();}
