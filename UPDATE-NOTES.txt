@@ -1,9 +1,9 @@
-agniwar responsive layout and icon alignment update
+agniwar navigation update
 
-This package supersedes the previous reference redesign update. It includes the earlier frontend redesign and AdSense verification work as well as the latest responsive fixes. It contains frontend files and documentation; it does not contain server or transfer engine files.
+This package supersedes previous redesign and responsive update packages. The logo, transfer links, canonical metadata, sitemap, app start URL and service-worker shell use the homepage /. A Vercel rewrite also maps the older /transfer link to the application. The mobile navigation has an accessible menu; online status has a checkmark and reconnecting remains distinct.
 
-Merge into your existing repository preserving paths. Review local changes before overwriting, commit, and push. Vercel must build the updated commit. Keep your existing VITE_SIGNAL_URL environment variable. After deployment, refresh the site; if needed, close and reopen it so the updated service worker can take control.
+Merge these files into the existing repository preserving paths. Review existing local changes before overwriting. IMPORTANT: if your repository already has a vercel.json, merge the included /transfer rewrite into its existing rewrites rather than replacing that file; retain all your existing configuration. Commit and push to deploy on Vercel. Keep your existing VITE_SIGNAL_URL environment variable.
 
-Responsive layouts were tested at nine viewport sizes with desktop Chromium. Discovery, real local browser-to-browser transfers, file history and page links were tested. Testing on actual phones and additional browsers is still recommended.
+The build, tests, responsive checks, navigation, and local browser-to-browser file transfers passed. Test on your live Vercel deployment and physical phones after deploying. Refresh or close and reopen older site tabs if a previous service worker remains active.
 
-Ads remain disabled by default; verification does not guarantee Google approval. Review publisher policies, configure a real ad slot and meet consent/privacy obligations before enabling ads.
+AdSense verification remains present; ads are disabled by default and Google approval is not guaranteed.
