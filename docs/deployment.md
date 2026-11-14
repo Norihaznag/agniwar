@@ -24,13 +24,17 @@ Terminate TLS at the proxy and use `wss://` publicly. `/health` provides a simpl
 Set build command `npm ci && npm run build` and output directory `apps/web/dist`. Build-time variables:
 
 - `VITE_SIGNAL_URL=wss://signal.your-domain.example/signal` (required for public deployment).
-- `PUBLIC_SITE_URL=https://your-domain.example` (an HTTPS origin with no path): generates canonicals, sitemap, and Article structured data. The development build deliberately omits canonicals and has an empty sitemap rather than inventing a public URL.
-- `PUBLIC_CONTACT_EMAIL=help@your-domain.example`: publishes the real support address on the contact page.
+- `PUBLIC_SITE_URL=https://your-domain.example` (an HTTPS origin with no path): generates canonicals, sitemap, and Article structured data. The static site defaults to https://www.agniwar.com; set this variable for a different deployment and to add the transfer page canonical.
+- `PUBLIC_CONTACT_EMAIL=support@agniwar.com`: publishes the support address; this is the default unless overridden.
 - Optional `VITE_TURN_URL`, `VITE_TURN_USERNAME`, `VITE_TURN_CREDENTIAL`: configure a TURN service. **All Vite variables are public in the browser bundle. Do not embed permanent privileged credentials.** Time-limited TURN credentials need an additional trusted credential-issuance design not provided here.
 
 The `_redirects` file serves the app at `/transfer`; static guide and legal pages are generated into directory indexes. Review CSP, security headers, cache behavior and routes for the actual host. The service worker caches the app shell/assets; its presence does not permit offline discovery or transfers. Test installability on target browsers, especially iOS.
 
-Do not add AdSense to `/transfer`. This package contains no ad code; implement and review any future ads only on suitable educational pages and against current Google policies. Approval is not guaranteed.
+## AdSense
+
+The public publisher ID is configured in the ownership verification meta tag and `apps/web/public/ads.txt`. Deploy first, select **Meta tag** in AdSense and request review. Never place ad code on `/transfer`. Actual approval is Google's decision.
+
+By default no advertising script loads. Before enabling ads, configure and test a Google-certified consent management platform appropriate to your visitors, complete and independently review the operator's privacy, retention, contact and legal disclosures, and check Google publisher policies. Disclose any other ad vendors enabled in the account. Set `PUBLIC_CONTACT_EMAIL` and `PUBLIC_SITE_URL` to the real public contact and site origin at build time. After approval and those checks, `PUBLIC_ENABLE_ADS=true` adds the AdSense script only to individual guide articles and adds an advertising disclosure to the privacy page. Rebuild and redeploy. Confirm ad placements and disable any formats that could interfere with navigation; do not enable ads elsewhere. This flag does not itself configure or supply a consent mechanism.
 
 ## Physical-device test plan
 
